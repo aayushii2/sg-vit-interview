@@ -1,0 +1,48 @@
+//To input a string containing paranthesis (),{},[] and check if it is a valid string or not
+/*Inputs:
+1. ()[]{} - valid
+2. (} - not valid
+3. ({})[] - valid
+4. [{}(]) - not valid
+ */
+import java.util.*;
+public class paran {
+    static boolean isBalanced(String s)
+    {
+        Stack<Character> st = new Stack<>();
+        st.push('$');
+        for(int i=0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            if(ch=='(' || ch=='{' || ch=='[')
+            {
+                st.push(ch);
+            }
+            else if(ch==')')
+            {
+                if(st.peek()!='(')
+                    return false;
+                st.pop();
+            }
+            else if(ch=='}')
+            {
+                if(st.peek()!='{')
+                    return false;
+                st.pop();
+            }
+            else if(ch==']')
+            {
+                if(st.peek()!='[')
+                    return false;
+                st.pop();
+            }
+        }
+        return st.peek()=='$';
+    }
+    public static void main(String[] args) {
+        Scanner ss = new Scanner(System.in);
+        String s = ss.next();
+        System.out.println(isBalanced(s));
+        ss.close();
+    }
+}
